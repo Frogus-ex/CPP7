@@ -33,8 +33,8 @@ main (void)
     {
       std::cout << "Error: " << e.what () << std::endl;
     }
-    const Array<int> constArr (5);
-    int value = constArr[0];
-    std::cout << "value at constArr index 0 = " << value << "\n";
+  const Array<int> constArr (5);
+  int value = constArr[0];
+  std::cout << "value at constArr index 0 = " << value << "\n";
   return (0);
 }
