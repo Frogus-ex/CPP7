@@ -1,40 +1,53 @@
-#include "Array.hpp"
 #include <iostream>
+#include <Array.hpp>
 
-int
-main (void)
+#define MAX_VAL 750
+int main(int, char**)
 {
-  // Test 1: Array vide
-  Array<int> empty;
-  std::cout << "Empty array size: " << empty.size () << std::endl;
-
-  // Test 2: Array avec éléments
-  Array<int> arr (5);
-  for (unsigned int i = 0; i < arr.size (); i++)
-    arr[i] = static_cast<int> (i) * 10;
-
-  std::cout << "Original array: ";
-  for (unsigned int i = 0; i < arr.size (); i++)
-    std::cout << arr[i] << " ";
-  std::cout << std::endl;
-
-  // Test 3: Constructeur de copie (deep copy)
-  Array<int> copy = arr;
-  copy[0] = 999;
-  std::cout << "After modifying copy[0]: original=" << arr[0]
-            << " copy=" << copy[0] << std::endl;
-
-  // Test 4: Exception
-  try
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(static_cast<unsigned int>(time(NULL)));
+    for (int i = 0; i < MAX_VAL; i++)
     {
-      std::cout << arr[10] << std::endl;
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
     }
-  catch (const std::out_of_range &e)
+    //SCOPE
     {
-      std::cout << "Error: " << e.what () << std::endl;
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
     }
-  const Array<int> constArr (5);
-  int value = constArr[0];
-  std::cout << "value at constArr index 0 = " << value << "\n";
-  return (0);
+
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;
+    return 0;
 }

@@ -38,11 +38,26 @@ main (void)
   int arr1[5] = { 1, 2, 3, 4, 5 };
   iter (arr1, 5, printInt);
   std::cout << std::endl;
+  std::cout << std::endl;
+
+  // Test 1: Array d'int non-const avec fonction const
+  std::cout << "Test 1 - Array int non-const, fonction const:"
+            << std::endl;
+  iter (arr1, 5, printIntConst);
+  std::cout << std::endl;
+  std::cout << std::endl;
 
   // Test 2: Array d'int const avec fonction const
   std::cout << "Test 2 - Array int const, fonction const:" << std::endl;
   const int arr2[5] = { 10, 20, 30, 40, 50 };
   iter (arr2, 5, printIntConst);
+  std::cout << std::endl;
+  std::cout << std::endl;
+
+    // Test 2: Array d'int const avec fonction non-const
+  std::cout << "Test 2 - Array int const, fonction non-const:" << std::endl;
+  iter (arr2, 5, printInt);
+  std::cout << std::endl;
   std::cout << std::endl;
 
   // Test 3: Modifier les éléments
@@ -53,6 +68,7 @@ main (void)
   iter (arr3, 4, increment);
   iter (arr3, 4, printInt);
   std::cout << std::endl;
+  std::cout << std::endl;
 
   // Test 4: Array de strings
   std::cout << "Test 4 - Array de strings:" << std::endl;
@@ -62,3 +78,4 @@ main (void)
 
   return (0);
 }
+
